@@ -24,7 +24,7 @@
     "bugs": "https://github.com/theroux/clingify/issues",
     "homepage": "https://github.com/theroux/clingify",
     "docs": "https://github.com/theroux/clingify",
-    "demo": "https://github.com/theroux/clingify",
+    "demo": "http://theroux.github.io/clingify/",
     "download": "https://github.com/theroux/clingify",
     "dependencies": {
         "jquery": ">=1.7"
