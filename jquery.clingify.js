@@ -1,5 +1,5 @@
 /*
- * Clingify v1.0.0
+ * Clingify v1.0.1
  *
  * A jQuery 1.7+ plugin for sticky elements
  * http://github.com/theroux/clingify
@@ -54,7 +54,6 @@
         this._name = pluginName;
 
         this.vars = {
-            elemOffset: this.$element.offset().top, // Y-position for Clingify element
             elemHeight: this.$element.height()
         };
         this.init();
@@ -96,10 +95,13 @@
         },
 
         //Other functions below
-        checkWindowCoords: function() {
+        checkCoords: function() {
             var coords = {
                 windowWidth: $window.width(),
-                windowOffset: $window.scrollTop()
+                windowOffset: $window.scrollTop(),
+                // Y-position for Clingify placeholder
+                // needs to be recalculated in DOM has shifted
+                placeholderOffset: this.findPlaceholder().offset().top
             };
             return coords;
         },
@@ -128,9 +130,9 @@
 
         checkElemStatus: function() {
             var cling = this,
-                currentCoords = cling.checkWindowCoords(),
+                currentCoords = cling.checkCoords(),
                 isScrolledPast = function() {
-                    if (currentCoords.windowOffset >= cling.vars.elemOffset) {
+                    if (currentCoords.windowOffset >= currentCoords.placeholderOffset) {
                         return true;
                     } else {
                         return false;
