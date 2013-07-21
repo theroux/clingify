@@ -5,13 +5,14 @@
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
     <head>
         <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>Clingify Demo</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width">
-        <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+        <meta name="description" content="A flexible jQuery plugin for sticky elements">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <!-- build:css({.tmp,app}) styles/main.css -->
         <link rel="stylesheet" href="styles/clingify.css">
         <link rel="stylesheet" href="styles/demo.css">
+        <!-- endbuild -->
         <!-- build:js scripts/vendor/modernizr.js -->
         <script src="bower_components/modernizr/modernizr.js"></script>
         <!-- endbuild -->
@@ -102,6 +103,7 @@ $(function() {
                 </section>
                 <section id="options">
                     <h2>Options</h2>
+                    <p class="mobileonly">(If table data is cut off, scroll left or right.)</p>
                     <table class="table table-striped options">
                         <tr>
                             <th>Propery</th>
@@ -190,10 +192,8 @@ $(function() {
             </div>
         </div>
 
-
-        <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
         <script>
-            var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
+            var _gaq=[['_setAccount','UA-42601962-1'],['_trackPageview']];
             (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
             g.src='//www.google-analytics.com/ga.js';
             s.parentNode.insertBefore(g,s)}(document,'script'));

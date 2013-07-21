@@ -9,7 +9,6 @@ $(function() {
 		};
 
 	$firstTarget.clingify({
-		breakpoint : 600,
 		extraClass : 'primaryClingifyElement',
 		locked : function() {
 			matchWidths($firstTarget);
@@ -19,7 +18,6 @@ $(function() {
 		}
 	});
 	$secondTarget.clingify({
-		breakpoint : 600,
 		extraClass : 'secondaryClingifyElement',
 		locked : function() {
 			matchWidths($secondTarget);

@@ -1,16 +1,25 @@
+html {
+   background: #eee;
+}
 body {
     font-size: 1em;
+
 }
 .wrapper {
     background: #eee;
     color: #333;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     height: 100%;
+    width: 100%;
 }
 .content {
     margin: 0 auto;
     padding: 1em 0;
+
     width: 55%;
+    @media #{$mobileish} {
+        width: 90%;
+    }
     section {
         padding: 3.5em 0 0;
     }
@@ -64,8 +73,15 @@ body {
     font-family: monospace;
     margin: 0 auto 1em;
     padding: 2em;
+    @include force-wrap
 }
 .options {
+    // @include box-sizing(border-box);
     border: 1px solid $tableBorder;
     font-size: 1em;
+    display: block; // iOS displays as table by default. Interferes with overflow on small screens.
+    overflow-x: auto;
+
+    tbody {
+    }
 }
