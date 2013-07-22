@@ -1,6 +1,6 @@
 {
   "name": "clingify",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A very flexible jQuery plugin for sticky page elements",
   "main": "jquery.clingify.js",
   "author": "Andrew Theroux",

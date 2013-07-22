@@ -1,5 +1,5 @@
 /*
- * Clingify v1.0.1
+ * Clingify v1.0.2
  *
  * A jQuery 1.7+ plugin for sticky elements
  * http://github.com/theroux/clingify
