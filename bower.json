@@ -1,0 +1,13 @@
+{
+  "name": "clingify",
+  "version": "1.0.0",
+  "author": "Andrew Theroux",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "components"
+  ],
+  "dependencies": {
+    "jquery": "1.7",
+  }
+}
