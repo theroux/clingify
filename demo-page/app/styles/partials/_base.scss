@@ -76,12 +76,8 @@ body {
     @include force-wrap
 }
 .options {
-    // @include box-sizing(border-box);
     border: 1px solid $tableBorder;
     font-size: 1em;
     display: block; // iOS displays as table by default. Interferes with overflow on small screens.
     overflow-x: auto;
-
-    tbody {
-    }
 }
