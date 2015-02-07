@@ -1,0 +1,24 @@
+
+/* Baseline selectors */
+
+.primaryClingifyElement, .secondaryClingifyElement {
+	&.js-clingify-wrapper {
+		width: 100%;
+	}
+	&.js-clingify-locked {
+		left: 0;
+		position: fixed;
+		top: 0;	
+		z-index: 99999;
+	}
+}
+
+.tertiaryClingifyElement {
+	&.js-clingify-wrapper {
+		width: 460px;
+	}
+	&.js-clingify-locked {
+		position: fixed;
+		z-index: 99999;
+	}
+}
