@@ -1,9 +1,10 @@
 $(function() {
 	'use strict';
 
-	var $firstTarget = $('.nav-persistent'),
+	var $firstTarget = $('nav'),
 		$secondTarget = $('.second-clingy'),
 		$fluidParent = $('.content'),
+		$sidebar = $('.some-sidebar'),
 		matchWidths = function($elem) {
 			$elem.width($fluidParent.width());
 		};
@@ -25,5 +26,8 @@ $(function() {
 		resized : function() {
 			matchWidths($secondTarget);
 		}
+	});
+	$sidebar.clingify({
+		extraClass : 'tertiaryClingifyElement',
 	});
 });

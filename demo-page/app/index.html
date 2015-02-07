@@ -10,8 +10,7 @@
         <meta name="description" content="A flexible jQuery plugin for sticky elements">
         <meta name="viewport" content="width=device-width,initial-scale=1">
         <!-- build:css({.tmp,app}) styles/main.css -->
-        <link rel="stylesheet" href="styles/clingify.css">
-        <link rel="stylesheet" href="styles/demo.css">
+        <link rel="stylesheet" href="styles/main.css">
         <!-- endbuild -->
         <!-- build:js scripts/vendor/modernizr.js -->
         <script src="bower_components/modernizr/modernizr.js"></script>
@@ -19,29 +18,28 @@
     </head>
     <body>
         <div class="wrapper">
-            <div class="content">
+            <div class="primary">
                 <a href="//github.com/theroux/clingify" class="github-link">&laquo; Back to GitHub Repo</a>
                 <header>
                     <h1 class="title">Clingify Demo</h1>
-                    <nav class="nav-persistent">
+                    <nav>
                         <ul>
                             <li>Jump to:</li>
                             <li><a href="#purpose">Purpose</a></li>
                             <li><a href="#features">Features</a></li>
                             <li><a href="#how-to-use">How to use</a></li>
                             <li><a href="#options">Options</a></li>
-                            <li><a href="//github.com/theroux/clingify">Find on GitHub</a></li>
                         </ul>
                     </nav>
                 </header>
                 <section id="purpose">
                     <h2 >Purpose</h2>
 
-                    <p>Clingify is a jQuery plugin that allows you to easily create &ldquo;sticky&rdquo; headers and navigation elements. Once you scroll past the targeted element, the plugin will toggle a CSS class that gives the element a fixed position, pinning it to the top of the page.
+                    <p>Clingify is a jQuery plugin that allows you to easily create &ldquo;sticky&rdquo; or &ldquo;fixed&rdquo; headers, navs, and other page elements. Once you scroll past the targeted element, the plugin will toggle a CSS class that gives the element a fixed position, pinning it in place on the page.</p>
                 </section>
                 <section id="features">
                     <h2>Features</h2>
-                    <p>There are many other &ldquo;sticky&rdquo; / &ldquo;clingy&rdquo; plugins out there, but here are a few reasons to consider Clingify:</p>
+                    <p>There are many other &ldquo;sticky&rdquo;  plugins out there, but here are a few reasons to consider Clingify:</p>
                     <ul class="advantages">
                         <li>No inline CSS. Everything is controlled via classes, so you don't need to understand Javascript to use this plugin. I have included some sensible default CSS, but you are free to edit it.</li>
                         <li>Seriously, though. Inline CSS is a pain in the butt.</li>
@@ -59,7 +57,9 @@
                     <p>Just initialize the script somewhere after you&rsquo;ve included jQuery (1.7+) and the plugin.</p>
                     <p>Simple:</p>
                     <code class="initialization">
-<pre>&lt;script type="text/javascript" src="/js/jquery.js">&lt;/script&gt;
+<pre>
+&lt;link rel="stylesheet" href="/css/clingfy.css" /&gt;
+&lt;script type="text/javascript" src="/js/jquery.js">&lt;/script&gt;
 &lt;script type="text/javascript" src="/js/jquery.clingify.js">&lt;/script&gt;                          
 &lt;script type="text/javascript"&gt;
 $(function() {
@@ -150,6 +150,9 @@ $(function() {
                         </tr>
 
                     </table>
+
+                    <p><a href="//github.com/theroux/clingify">View plugin source code at GitHub</a></p>
+
                 </section>
                 <section id="lorem-ipsum">
                     <h2>Some filler text to force a long, scrolling page</h2>
@@ -189,8 +192,16 @@ $(function() {
 
                     <p>Nulla facilisi. Integer lacinia sollicitudin massa. Cras metus. Sed aliquet risus a tortor. Integer id quam. Morbi mi. Quisque nisl felis, venenatis tristique, dignissim in, ultrices sit amet, augue. Proin sodales libero eget ante. Nulla quam. Aenean laoreet. Vestibulum nisi lectus, commodo ac, facilisis ac, ultricies eu, pede. Ut orci risus, accumsan porttitor, cursus quis, aliquet eget, justo. Sed pretium blandit orci. </p>
                 </section>
+            </div><!-- content -->
+            <div class="secondary">
+                <section class="some-sidebar">
+                    <h3>Sidebar content</h3>
+                    <div class="one"></div>
+                    <div class="two"></div>
+                    <div class="three"></div>
+                </section>
             </div>
-        </div>
+        </div><!-- wrapper -->
 
         <script>
             var _gaq=[['_setAccount','UA-42601962-1'],['_trackPageview']];
