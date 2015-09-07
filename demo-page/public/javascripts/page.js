@@ -11189,7 +11189,7 @@ webpackJsonp([0,1],[
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(jQuery) {/*
-	 * Clingify v1.1
+	 * Clingify v1.2
 	 *
 	 * A jQuery 1.7+ plugin for sticky elements
 	 * http://github.com/theroux/clingify
@@ -11198,9 +11198,10 @@ webpackJsonp([0,1],[
 	 *
 	 * By Andrew Theroux
 	 */
+	// ';' protects against concatenated scripts which may not be closed properly.
 	'use strict';
 	
-	(function ($, window, document, undefined) {
+	;(function ($, window, document, undefined) {
 	    'use strict';
 	
 	    // defaults
@@ -11215,26 +11216,31 @@ webpackJsonp([0,1],[
 	        // Below this value, Clingify behavior is disabled. (Useful for small screens.)
 	        // Use 0 if you want Clingify to work at all screen widths/heights.
 	
+	        throttle: 50,
+	        // Delay Clingify functions, in milliseconds, when scrolling/resizing.
+	        // Too fast is bad for performance, especially on older browsers/machines.
+	
 	        extraClass: '',
 	        // Add an additional class of your choosing to the sticky element
 	        // and its parent wrapper & placeholder divs
 	
-	        throttle: 50,
-	        // Delay Clingify functions, in milliseconds, when scrolling/resizing.
-	        // Too fast is bad for performance, especially on older browsers/machines.
+	        // Classes for CSS hooks
+	        wrapperClass: 'js-clingify-wrapper',
+	        lockedClass: 'js-clingify-locked',
+	        overrideClass: 'js-clingify-permalock',
+	        placeholderClass: 'js-clingify-placeholder',
 	
 	        // Callback functions
 	        detached: $.noop, // Fires before element is detached
 	        locked: $.noop, // Fires before element is attached
 	        resized: $.noop, // Fires after window resize event, benefits from the throttle
 	
-	        // Classes for CSS hooks
-	        wrapperClass: 'js-clingify-wrapper',
-	        lockedClass: 'js-clingify-locked',
-	        overrideClass: 'js-clingify-permalock',
-	        placeholderClass: 'js-clingify-placeholder'
-	    },
-	        $window = $(window);
+	        //new
+	        scrollingElem: 'window',
+	        fixed: true },
+	        // Use fixed positioning vs. transforms applied to elem   
+	
+	    $window = $(window);
 	
 	    /* 
 	    var privateMethod = function () {
@@ -11270,6 +11276,12 @@ webpackJsonp([0,1],[
 	                this.options.placeholderClass += "." + this.options.extraClass;
 	            }
 	
+	            if (this.options.scrollingElem === "window") {
+	                this.options.scrollingElem = $(window);
+	            } else {
+	                this.options.scrollingElem = $(this.options.scrollingElem);
+	            }
+	
 	            this.bindScroll();
 	            this.bindResize();
 	        },
@@ -11278,7 +11290,7 @@ webpackJsonp([0,1],[
 	            var cling = this,
 	                scrollTimeout;
 	
-	            $window.on('resize.Clingify', function (event) {
+	            $(window).on('resize.Clingify', function (event) {
 	                if (!scrollTimeout) {
 	                    scrollTimeout = setTimeout(function () {
 	                        if (event.type === 'resize' && typeof cling.options.resized === 'function') {
@@ -11295,7 +11307,7 @@ webpackJsonp([0,1],[
 	            var cling = this,
 	                scrollTimeout;
 	
-	            $window.on('scroll.Clingify', function (event) {
+	            $(cling.options.scrollingElem).on('scroll.Clingify', function (event) {
 	                if (!scrollTimeout) {
 	                    scrollTimeout = setTimeout(function () {
 	                        cling.checkElemStatus();
@@ -11306,10 +11318,10 @@ webpackJsonp([0,1],[
 	        },
 	
 	        unbindResize: function unbindResize() {
-	            $window.off('resize.Clingify');
+	            $(window).off('resize.Clingify');
 	        },
 	        unbindScroll: function unbindScroll() {
-	            $window.off('scroll.Clingify');
+	            $(this.options.scrollingElem).off('scroll.Clingify');
 	        },
 	
 	        destroy: function destroy() {
@@ -11323,9 +11335,9 @@ webpackJsonp([0,1],[
 	        //Other functions below
 	        checkCoords: function checkCoords() {
 	            var coords = {
-	                windowHeight: $window.height(),
-	                windowWidth: $window.width(),
-	                windowOffset: $window.scrollTop(),
+	                windowHeight: $(this.options.scrollingElem).height(),
+	                windowWidth: $(this.options.scrollingElem).width(),
+	                windowOffset: $(this.options.scrollingElem).scrollTop(),
 	                // Y-position for Clingify placeholder
 	                // needs to be recalculated in DOM has shifted
 	                placeholderOffset: this.findPlaceholder().offset().top
@@ -11364,6 +11376,7 @@ webpackJsonp([0,1],[
 	        checkElemStatus: function checkElemStatus() {
 	            var cling = this,
 	                currentCoords = this.checkCoords(),
+	                fixed = this.options.fixed,
 	                isScrolledPast = function isScrolledPast() {
 	                if (currentCoords.windowOffset >= currentCoords.placeholderOffset) {
 	                    return true;
@@ -11377,12 +11390,19 @@ webpackJsonp([0,1],[
 	                } else {
 	                    return false;
 	                }
+	            },
+	                distanceScrolled = function distanceScrolled() {
+	                return cling.options.scrollingElem.scrollTop();
 	            };
 	
-	            if (isScrolledPast() && isWideTallEnough()) {
+	            if (isScrolledPast() && isWideTallEnough() && fixed) {
 	                this.lockElem();
-	            } else if (!isScrolledPast() || !isWideTallEnough()) {
+	            } else if ((!isScrolledPast() || !isWideTallEnough()) && fixed) {
 	                this.detachElem();
+	            } else if (isScrolledPast() && isWideTallEnough() && !fixed) {
+	                this.transformElem(distanceScrolled());
+	            } else if ((!isScrolledPast() || !isWideTallEnough()) && !fixed) {
+	                this.untransformElem();
 	            }
 	            return;
 	        },
@@ -11395,7 +11415,24 @@ webpackJsonp([0,1],[
 	        test: function test() {
 	            console.log('Public test method is working!');
 	        },
+	        transformElem: function transformElem(height) {
+	            var $wrapper = this.findWrapper(),
+	                transformAmount = height,
+	                transformString = "translateY(" + transformAmount + "px)";
 	
+	            $wrapper.css({
+	
+	                "transform": transformString
+	            });
+	            return;
+	        },
+	        untransformElem: function untransformElem() {
+	            var resetTransform = "translateY(0)";
+	            this.findWrapper().css({
+	                "transform": resetTransform
+	            });
+	            return;
+	        },
 	        wrap: function wrap() {
 	            // Creates wrapper and placeholder divs
 	            var $buildPlaceholder = $('<div>').addClass(this.options.placeholderClass),
@@ -11447,7 +11484,6 @@ webpackJsonp([0,1],[
 	            }
 	    };
 	})(jQuery, window, document);
-	// ';' protects against concatenated scripts which may not be closed properly.
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
 
 /***/ }

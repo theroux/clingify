@@ -71,19 +71,7 @@ $(function() {
 &lt;/html&gt;
 </pre>
                     </code>
-                    <p>Here are the default settings:</p>
-                     <code class="initialization">
-<pre>$('.some-selector').clingify({
-    breakpoint: 0,  // in pixels
-    extraClass: '',
-    throttle: 100,  // in milliseconds
-    
-    // Callback functions:
-    detached: $.noop,
-    locked: $.noop,
-    resized: $.noop
-});</pre>
-                    </code>
+                   
                     <p>Here&rsquo;s the code for the Clingify effects being used for this demo.</p>
                      <code class="initialization">
 <pre>$(function() {
@@ -129,13 +117,19 @@ $(function() {
                 </section>
                 <section id="options">
                     <h2>Options</h2>
-                    <p class="mobileonly">(If table data is cut off, scroll left or right.)</p>
                     <table class="table table-striped options">
                         <tr>
                             <th>Property</th>
                             <th>Value Types</th>
                             <th>Default</th>
                             <th>Notes</th>
+                        </tr>
+                        <tr>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th class="subhead">Breakpoints</th>
+
                         </tr>
                         <tr>
                             <td>breakpointHeight</td>
@@ -150,10 +144,22 @@ $(function() {
                             <td>At screen sizes narrower than this number (of pixels), disable Clingify.</td>
                         </tr>
                         <tr>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th class="subhead">Performance</th>
+                        </tr>
+                        <tr>
                             <td>throttle</td>
                             <td>integer</td>
                             <td>50</td>
                             <td>How often, in milliseconds, to fire scroll and resize dependent functions.</td>
+                        </tr>
+                        <tr>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th class="subhead">CSS Selectors</th>                            
                         </tr>
                         <tr>
                             <td>extraClass</td>
@@ -187,6 +193,12 @@ $(function() {
                             <td>The div that wraps the target element.</td>
                         </tr>
                         <tr>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th class="subhead">Callbacks</th>
+                        </tr>
+                        <tr>
                             <td>detached</td>
                             <td>function</td>
                             <td><em>null</em></td>
@@ -204,6 +216,28 @@ $(function() {
                             <td><em>null</em></td>
                             <td>Callback that fires just after window is resized.<br/>
                             (This runs whether or not the element is locked.)</td>
+                        </tr>
+                        <tr>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th class="subhead">Advanced modes (new!)</th>
+                        </tr>
+                        <tr>
+                            <td>scrollingElem</td>
+                            <td>string</td>
+                            <td>window</td>
+                            <td>Where to attach the event listener for the scroll event<br/>
+                            (Useful for scrolling offcanvas page elements.)</td>
+                        </tr>
+                        <tr>
+                            <td>fixed</td>
+                            <td>boolean</td>
+                            <td>true</td>
+                            <td>Switches between "fixed positioning" (classic) mode and transform mode.<br/>
+                            Fixed positioning mode relies on <code class="code">position: fixed</code> in the CSS.<br/>
+                            Transform mode repositions the target element using TranslateY.<br/>
+                            (For advanced use cases. Experimental.)</td>
                         </tr>
 
                     </table>

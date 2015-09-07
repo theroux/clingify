@@ -14,12 +14,19 @@
 	}
 }
 
+%highlightcode {
+	color: $brandcolor;
+}
+
 %box {
     background: $accent;
     border-radius: 0.5rem;
     padding: 1rem;
-    .callout {
-        color: $accenttext;
-    }
+    
     overflow-x: scroll;
+
+    .callout {
+        @extend %highlightcode;
+    }
 }
+

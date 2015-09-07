@@ -9,7 +9,9 @@ $fadetext : rgba($blackish, 0.2);
 
 $tableBackground : $offwhite;
 $bodyBackground : white;
-$tableBackgroundAccent : $accent;
+$tableBackgroundAccent : rgba($accent, 0.5);
+
+$brandcolor : rgba(200,0,123, 1);
 
 html {
    background: $offwhite;
