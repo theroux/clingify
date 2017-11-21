@@ -17,11 +17,16 @@
         // the name of using in .data()
         dataPlugin = "plugin_" + pluginName,
         defaults = {
-            breakpointHeight: 0,
-            breakpointWidth: 0,
+                breakHeightMin: 0,
+            breakWidthMin: 0,
             // Media query breakpoints in pixels. 
             // Below this value, Clingify behavior is disabled. (Useful for small screens.)
             // Use 0 if you want Clingify to work at all screen widths/heights.
+
+            breakHeightMax: $(window).height(),
+            breakWidthMax: $(window).width(),
+            // Media query breakpoints in pixels. 
+            // Above this value, Clingify behavior is disabled. (Useful for small screens.)
 
             throttle: 50,
             // Delay Clingify functions, in milliseconds, when scrolling/resizing.
@@ -192,7 +197,10 @@
                     }
                 },
                 isWideTallEnough = function() {
-                    if ((currentCoords.windowWidth >= cling.options.breakpointWidth) && currentCoords.windowHeight >= cling.options.breakpointHeight) {
+                    if ((currentCoords.windowWidth >= cling.options.breakWidthMin) &&
+                        (currentCoords.windowHeight >= cling.options.breakHeightMin) &&
+                        (currentCoords.windowWidth <= cling.options.breakWidthMax) &&
+                        (currentCoords.windowHeight <= cling.options.breakHeightMax)) {
                         return true;
                     } else {
                         return false;
